@@ -50,6 +50,11 @@ export function createServer(config, store, runner) {
         throw error(f.count > 30 ? 'Слишком много попыток' : 'Неверный ключ доступа', f.count > 30 ? 429 : 401);
       }
       if (req.method === 'GET' && url.pathname === '/api/status') return send(200, { online: true, role, desktop: !!config.desktop, workspace: config.workspace, activeTaskId: runner.active?.task.id || null, publicUrl: config.publicUrl || null });
+      if (req.method === 'POST' && url.pathname === '/api/shutdown') {
+        if (role !== 'owner') throw error('Доступно только владельцу', 403);
+        await runner.close(); send(200, { stopped: true });
+        server.close(); server.closeIdleConnections(); return;
+      }
       if (url.pathname === '/api/tasks' && req.method === 'GET') return send(200, { tasks: store.tasks.slice(-30).reverse().map(t => ({ id: t.id, prompt: t.prompt, status: t.status, createdAt: t.createdAt, updatedAt: t.updatedAt })) });
       if (url.pathname === '/api/tasks' && req.method === 'POST') {
         const data = await body(req);

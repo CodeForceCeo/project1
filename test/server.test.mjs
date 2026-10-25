@@ -40,6 +40,7 @@ test('idempotent tasks, validation, cancellation and owner-only approvals', asyn
   assert.equal((await request('/api/tasks', { data: { ...data, prompt: 'Other' } })).code, 409);
   assert.equal((await request('/api/tasks', { data: { prompt: ' ', requestId: 'request_456' } })).code, 400);
   assert.equal((await request(`/api/tasks/${a.data.id}/approvals/1`, { token: config.actionsToken, data: { decision: 'accept' } })).code, 403);
+  assert.equal((await request('/api/shutdown', { token: config.actionsToken, method: 'POST' })).code, 403);
   assert.equal((await request(`/api/tasks/${a.data.id}/cancel`, { method: 'POST' })).data.status, 'interrupted');
   assert.equal((await request(`/api/tasks/${a.data.id}`)).data.key, undefined);
 });
