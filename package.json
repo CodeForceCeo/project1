@@ -1,0 +1,15 @@
+{
+  "name": "pocket-codex",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal Windows Codex bridge with a mobile console and ChatGPT Actions",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/main.mjs",
+    "setup": "node scripts/setup.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check src/server.mjs && node --check src/runner.mjs && node --check public/app.js",
+    "doctor": "node scripts/doctor.mjs"
+  }
+}

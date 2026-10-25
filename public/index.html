@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10221f"><title>Pocket Codex — ваш компьютер рядом</title><link rel="icon" href="/icon.svg"><link rel="manifest" href="/manifest.webmanifest"><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+<div class="shell">
+  <aside>
+    <a class="brand" href="/"><img src="/icon.svg" alt="" width="38" height="38"><span>Pocket<span class="brand-light">Codex</span></span></a>
+    <div class="eyebrow">ВАШЕ РАБОЧЕЕ МЕСТО</div>
+    <div class="machine"><span class="indicator" id="indicator"></span><div><strong>Windows PC</strong><small id="connection">Подключение не выполнено</small></div></div>
+    <button class="new-task" id="newTask">＋ Новая задача</button>
+    <div class="row history-label"><span>История задач</span><span id="count">0</span></div>
+    <nav id="tasks" aria-label="История задач"><p class="muted">Здесь появятся ваши задачи.</p></nav>
+    <div class="sidebar-bottom"><span class="tiny">Локальное выполнение · личный доступ</span><button id="logout" class="text-button" hidden>Отключиться</button></div>
+  </aside>
+  <main>
+    <header><span>КОМПЬЮТЕР В КАРМАНЕ</span><span class="badge" id="mode">Личный мост</span></header>
+    <section id="login" class="welcome">
+      <div class="eyebrow">НА СВЯЗИ С ВАШИМ КОМПЬЮТЕРОМ</div>
+      <h1>Вы задаёте направление.<br><em>Codex делает работу.</em></h1>
+      <p>Отправляйте задачи с телефона и следите за тем, как они выполняются на вашем Windows PC.</p>
+      <form id="loginForm" class="login-box"><label for="token">Ключ личного доступа</label><div class="row"><input id="token" type="password" autocomplete="off" placeholder="panelToken из config.local.json" required><button type="submit">Подключиться ↗</button></div><small>Ключ хранится только до закрытия вкладки.</small></form>
+      <div class="features"><div><b>01</b><strong>Опишите задачу</strong><span>Обычным сообщением, без команд.</span></div><div><b>02</b><strong>Следите за работой</strong><span>Действия, вопросы и статус в одном месте.</span></div><div><b>03</b><strong>Получите результат</strong><span>История сохраняется на вашем ПК.</span></div></div>
+    </section>
+    <section id="console" hidden>
+      <div class="intro"><div class="eyebrow">НА СВЯЗИ</div><h1 id="heading">Что сделаем сегодня?</h1><p id="subtitle">Ваш компьютер готов принять задачу.</p></div>
+      <form id="taskForm" class="composer"><label class="sr-only" for="prompt">Задача для Codex</label><textarea id="prompt" rows="4" maxlength="16000" placeholder="Например: создай в рабочей папке файл с планом на неделю…" required></textarea><div class="composer-foot"><span id="scope">Выполнение в рабочей папке</span><button id="submit" type="submit">Отправить задачу ↗</button></div></form>
+      <div id="suggestions" class="suggestions"><button data-prompt="Покажи список файлов в рабочей папке и кратко объясни её содержимое.">Посмотреть файлы ↗</button><button data-prompt="Создай файл plan.md с простым планом рабочей недели на русском языке.">Составить план ↗</button></div>
+      <article id="detail" hidden>
+        <div class="task-head"><div><div class="eyebrow">ТЕКУЩАЯ ЗАДАЧА</div><h2 id="taskTitle"></h2></div><span class="badge" id="taskStatus"></span></div>
+        <div class="row task-meta"><span id="taskTime"></span><button id="cancel" class="danger">Остановить</button><button id="continueTask" class="text-button" hidden>Продолжить этот чат ↗</button></div>
+        <div id="approvals"></div><p id="taskError" class="error" hidden></p>
+        <div class="result-card"><div class="eyebrow">ОТВЕТ CODEX</div><pre id="result">Ожидаем ответ…</pre></div>
+        <details open><summary>Ход выполнения <span id="eventCount"></span></summary><div id="events" class="timeline"></div></details>
+      </article>
+    </section>
+    <div id="notice" role="status" aria-live="polite" hidden></div>
+    <footer><span>Pocket Codex</span><span>Работа выполняется на вашем компьютере.</span></footer>
+  </main>
+</div>
+</body></html>
