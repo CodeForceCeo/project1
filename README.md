@@ -20,8 +20,8 @@
 Нужны Node.js 22+, Git и установленный Codex с рабочей авторизацией (`codex login`).
 
 ```powershell
-git clone https://github.com/CodeForceCeo/project1.git
-cd project1
+git clone https://github.com/reasqq/pocket-codex.git
+cd pocket-codex
 npm run setup -- --desktop
 npm run doctor
 npm start
